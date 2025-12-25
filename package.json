@@ -22,7 +22,8 @@
       "@orpc/client": "^1.12.2",
       "@libsql/client": "0.15.15",
       "libsql": "0.5.22",
-      "drizzle-orm": "^0.45.1"
+      "drizzle-orm": "^0.45.1",
+      "neverthrow": "^8.2.0"
     }
   },
   "type": "module",

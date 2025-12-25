@@ -11,15 +11,16 @@
   },
   "scripts": {},
   "dependencies": {
-    "@orpc/server": "catalog:",
+    "@memo-mono/auth": "workspace:*",
+    "@memo-mono/db": "workspace:*",
     "@orpc/client": "catalog:",
     "@orpc/openapi": "catalog:",
+    "@orpc/server": "catalog:",
     "@orpc/zod": "catalog:",
-    "drizzle-orm": "catalog:",
     "dotenv": "catalog:",
-    "zod": "catalog:",
-    "@memo-mono/auth": "workspace:*",
-    "@memo-mono/db": "workspace:*"
+    "drizzle-orm": "catalog:",
+    "neverthrow": "^8.2.0",
+    "zod": "catalog:"
   },
   "devDependencies": {
     "typescript": "catalog:",

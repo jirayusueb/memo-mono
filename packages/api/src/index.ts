@@ -1,20 +1,12 @@
-import { ORPCError, os } from "@orpc/server";
+// Re-export from presentation layer for backward compatibility
+export {
+  o,
+  publicProcedure,
+  protectedProcedure,
+} from "./presentation/procedures";
 
-import type { Context } from "./context";
+export { appRouter } from "./presentation/routers";
+export type { AppRouter, AppRouterClient } from "./presentation/routers";
 
-export const o = os.$context<Context>();
-
-export const publicProcedure = o;
-
-const requireAuth = o.middleware(async ({ context, next }) => {
-  if (!context.session?.user) {
-    throw new ORPCError("UNAUTHORIZED");
-  }
-  return next({
-    context: {
-      session: context.session,
-    },
-  });
-});
-
-export const protectedProcedure = publicProcedure.use(requireAuth);
+export { createContext } from "./context";
+export type { Context, CreateContextOptions } from "./context";

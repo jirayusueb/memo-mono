@@ -1,5 +1,4 @@
-import { createContext } from "@memo-mono/api/context";
-import { appRouter } from "@memo-mono/api/routers/index";
+import { appRouter, createContext } from "@memo-mono/api";
 import { auth } from "@memo-mono/auth";
 import { cors } from "@elysiajs/cors";
 import { OpenAPIHandler } from "@orpc/openapi/fetch";
@@ -39,7 +38,7 @@ const app = new Elysia({ adapter: CloudflareAdapter })
       methods: ["GET", "POST", "OPTIONS"],
       allowedHeaders: ["Content-Type", "Authorization"],
       credentials: true,
-    }),
+    })
   )
   .onRequest(({ request }) => {
     console.log(`${request.method} ${request.url}`);
@@ -54,7 +53,7 @@ const app = new Elysia({ adapter: CloudflareAdapter })
     });
 
     if (rpcResult.matched) {
-      return new Response(rpcResult.response.body, rpcResult.response);
+      return rpcResult.response;
     }
 
     const apiResult = await apiHandler.handle(request, {
@@ -63,7 +62,7 @@ const app = new Elysia({ adapter: CloudflareAdapter })
     });
 
     if (apiResult.matched) {
-      return new Response(apiResult.response.body, apiResult.response);
+      return apiResult.response;
     }
 
     return null;

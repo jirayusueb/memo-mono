@@ -1,7 +1,6 @@
 import type { RouterClient } from "@orpc/server";
 
-import { createContext } from "@memo-mono/api/context";
-import { appRouter } from "@memo-mono/api/routers/index";
+import { appRouter, createContext } from "@memo-mono/api";
 import { createORPCClient } from "@orpc/client";
 import { RPCLink } from "@orpc/client/fetch";
 import { createRouterClient } from "@orpc/server";
@@ -27,7 +26,7 @@ const getORPCClient = createIsomorphicFn()
   .server(() =>
     createRouterClient(appRouter, {
       context: async ({ req }) => {
-        return createContext({ context: req });
+        return createContext({ request: req });
       },
     }),
   )
