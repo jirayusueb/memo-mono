@@ -1,10 +1,11 @@
 import { Result, ok, err } from "neverthrow";
 
-import { TodoDTO, TodoEntity } from "@/domain/todo/entities/todo.entity";
-import { InvalidTodoTextError } from "@/domain/todo/errors/todo.errors";
-import { TodoRepository } from "@/domain/todo/repositories/todo.repository";
-import { TodoText } from "@/domain/todo/value-objects/todo-text.vo";
-import { RepositoryError } from "@/shared/errors/base.error";
+import type { TodoDTO } from "../../../domain/todo/entities/todo.entity";
+import { TodoEntity } from "../../../domain/todo/entities/todo.entity";
+import { InvalidTodoTextError } from "../../../domain/todo/errors/todo.errors";
+import type { TodoRepository } from "../../../domain/todo/repositories/todo.repository";
+import { TodoText } from "../../../domain/todo/value-objects/todo-text.vo";
+import { RepositoryError } from "../../../shared/errors/base.error";
 
 export type CreateTodoInput = {
   text: string;

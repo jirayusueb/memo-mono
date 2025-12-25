@@ -1,6 +1,6 @@
 import { ResultAsync } from "neverthrow";
 
-import { RepositoryError } from "@/shared/errors/base.error";
+import { RepositoryError } from "../../../shared/errors/base.error";
 
 import { TodoEntity } from "../entities/todo.entity";
 

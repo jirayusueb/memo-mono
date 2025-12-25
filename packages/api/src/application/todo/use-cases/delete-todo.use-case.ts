@@ -1,7 +1,7 @@
 import { Result, ok, err } from "neverthrow";
 
-import { TodoRepository } from "@/domain/todo/repositories/todo.repository";
-import { RepositoryError } from "@/shared/errors/base.error";
+import type { TodoRepository } from "../../../domain/todo/repositories/todo.repository";
+import { RepositoryError } from "../../../shared/errors/base.error";
 
 export type DeleteTodoInput = {
   id: number;

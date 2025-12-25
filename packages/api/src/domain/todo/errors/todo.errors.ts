@@ -1,4 +1,4 @@
-import { DomainError } from "@/shared/errors/base.error";
+import { DomainError } from "../../../shared/errors/base.error";
 
 export class InvalidTodoTextError extends DomainError {
   readonly code = "INVALID_TODO_TEXT";

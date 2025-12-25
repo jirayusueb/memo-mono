@@ -1,12 +1,12 @@
 import { ORPCError } from "@orpc/server";
 import z from "zod";
 
-import { CreateTodoUseCase } from "@/application/todo/use-cases/create-todo.use-case";
-import { DeleteTodoUseCase } from "@/application/todo/use-cases/delete-todo.use-case";
-import { GetAllTodosUseCase } from "@/application/todo/use-cases/get-all-todos.use-case";
-import { ToggleTodoUseCase } from "@/application/todo/use-cases/toggle-todo.use-case";
-import { DrizzleTodoRepository } from "@/infrastructure/todo/drizzle-todo.repository";
-import { publicProcedure } from "@/presentation/procedures";
+import { CreateTodoUseCase } from "../../application/todo/use-cases/create-todo.use-case";
+import { DeleteTodoUseCase } from "../../application/todo/use-cases/delete-todo.use-case";
+import { GetAllTodosUseCase } from "../../application/todo/use-cases/get-all-todos.use-case";
+import { ToggleTodoUseCase } from "../../application/todo/use-cases/toggle-todo.use-case";
+import { DrizzleTodoRepository } from "../../infrastructure/todo/drizzle-todo.repository";
+import { publicProcedure } from "../procedures";
 
 // Dependency Injection
 const todoRepository = new DrizzleTodoRepository();
@@ -17,13 +17,20 @@ const deleteTodoUseCase = new DeleteTodoUseCase(todoRepository);
 
 export const todoRouter = {
   getAll: publicProcedure.handler(async () => {
-    // Debug: return hardcoded data first
-    return [{ id: 1, text: "Test", completed: false }];
+    const result = await getAllTodosUseCase.execute();
+
+    if (result.isErr()) {
+      throw new ORPCError("INTERNAL_SERVER_ERROR", {
+        message: result.error.message,
+      });
+    }
+
+    return result.value;
   }),
 
   create: publicProcedure
     .input(z.object({ text: z.string().min(1) }))
-    .handler(async ({ input }) => {
+    .handler(async ({ input }: { input: { text: string } }) => {
       const result = await createTodoUseCase.execute({ text: input.text });
 
       if (result.isErr()) {
@@ -40,7 +47,7 @@ export const todoRouter = {
 
   toggle: publicProcedure
     .input(z.object({ id: z.number(), completed: z.boolean() }))
-    .handler(async ({ input }) => {
+    .handler(async ({ input }: { input: { id: number; completed: boolean } }) => {
       const result = await toggleTodoUseCase.execute({
         id: input.id,
         completed: input.completed,
@@ -60,7 +67,7 @@ export const todoRouter = {
 
   delete: publicProcedure
     .input(z.object({ id: z.number() }))
-    .handler(async ({ input }) => {
+    .handler(async ({ input }: { input: { id: number } }) => {
       const result = await deleteTodoUseCase.execute({ id: input.id });
 
       if (result.isErr()) {

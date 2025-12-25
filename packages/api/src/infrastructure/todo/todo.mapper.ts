@@ -1,5 +1,5 @@
-import { TodoEntity } from "@/domain/todo/entities/todo.entity";
-import { TodoText } from "@/domain/todo/value-objects/todo-text.vo";
+import { TodoEntity } from "../../../domain/todo/entities/todo.entity";
+import { TodoText } from "../../../domain/todo/value-objects/todo-text.vo";
 
 export type TodoRecord = {
   id: number;

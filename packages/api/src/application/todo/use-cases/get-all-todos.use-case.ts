@@ -1,8 +1,8 @@
 import { Result, ok, err } from "neverthrow";
 
-import { TodoDTO } from "@/domain/todo/entities/todo.entity";
-import { TodoRepository } from "@/domain/todo/repositories/todo.repository";
-import { RepositoryError } from "@/shared/errors/base.error";
+import type { TodoDTO } from "../../../domain/todo/entities/todo.entity";
+import type { TodoRepository } from "../../../domain/todo/repositories/todo.repository";
+import { RepositoryError } from "../../../shared/errors/base.error";
 
 export type GetAllTodosError = RepositoryError;
 
