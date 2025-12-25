@@ -11,7 +11,8 @@
     "destroy": "alchemy destroy"
   },
   "dependencies": {
-    "hono": "catalog:",
+    "elysia": "catalog:",
+    "@elysiajs/cors": "catalog:",
     "@orpc/server": "catalog:",
     "@orpc/openapi": "catalog:",
     "@orpc/zod": "catalog:",
